@@ -8,6 +8,7 @@ from PIL import Image
 
 #heading and image for the streamlit application
 pic = Image.open('Linkedin_Image.png')
+st.image(pic)
 st.markdown("# LinkedIn User Prediction Application")
 st.markdown("#### Created by: Philip Gasparovic")
 st.markdown("##### Please use the dropdown boxes and slider below to start your prediction.")
@@ -160,12 +161,8 @@ if st.button("Predict"):
     person = (income, education, parent, married, female, age)
     predicted_class = lr.predict([person])
     probs = lr.predict_proba([person])
-
-#writing the prediction results if the user is a LinkedIn user or not
-if predicted_class[0] == 1:
-    st.write(f"### This person is a LinkedIn User")
-else:
-    st.write(f"### This person is not a LinkedIn User")
-
-#shows the probability that this person is a LinkedIn user
-st.write(f"#### Probability that this person is a LinkedIn user: {probs[0][1]}")
+    if predicted_class[0] == 1:
+        st.write(f"### This person is a LinkedIn User")
+    else:
+        st.write(f"### This person is not a LinkedIn User")
+    st.write(f"#### Probability that this person is a LinkedIn user: {probs[0][1]}")
